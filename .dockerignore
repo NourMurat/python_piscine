@@ -1,0 +1,8 @@
+# python_piscine/dockerignore
+
+.git
+.gitignore
+*.md
+*.txt
+__pycache__
+*.pyc
