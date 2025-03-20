@@ -46,59 +46,57 @@ help:
 # Build the Docker image from Dockerfile only if it doesn't exist
 build:
 	@docker images -q $(IMAGE_NAME) | grep -q . && \
-	echo "$(YELLOW)Image $(IMAGE_NAME) already exists. Launch container!$(RESET)" || \
-	(echo "$(GREEN)Building image for Python 3.10...$(RESET)" && \
+	echo "$(YELLOW)Image $(IMAGE_NAME) already exists. Launch container!!!$(RESET)" || \
+	(echo "$(BLUE)Building image for Python 3.10...$(RESET)" && \
 		docker build -q -t $(IMAGE_NAME) . > /dev/null 2>&1 && \
 		echo "$(BLUE)Image $(IMAGE_NAME) successfully built$(RESET)")
+	@echo ""
 
 # RUN EXERSICES:
 00: build
-	@echo "$(GREEN)Running ex00...$(RESET)"
-	@echo ""
+	@echo "$(GREEN)Running: python ex00/Hello.py | cat -e$(RESET)"
 	@$(DOCKER_RUN) $(IMAGE_NAME) python ex00/Hello.py | cat -e
 
 01: build
-	@echo "$(GREEN)Running ex01...$(RESET)"
-	@echo ""
-	@$(DOCKER_RUN) $(IMAGE_NAME) python ex01/ft_time.py | cat -e
+	@echo "$(GREEN)Running: python ex01/format_ft_time.py | cat -e$(RESET)"
+	@$(DOCKER_RUN) $(IMAGE_NAME) python ex01/format_ft_time.py | cat -e
 
 02: build
-	@echo "$(GREEN)Running ex02...$(RESET)"
+	@echo "$(GREEN)Running: python ex02/tester.py | cat -e$(RESET)"
+	@$(DOCKER_RUN) $(IMAGE_NAME) python ex02/tester.py | cat -e
 	@echo ""
+	@echo "$(GREEN)Running: python ex02/find_ft_type.py | cat -e$(RESET)"
 	@$(DOCKER_RUN) $(IMAGE_NAME) python ex02/find_ft_type.py | cat -e
 
 03: build
-	@echo "$(GREEN)Running ex03...$(RESET)"
+	@echo "$(GREEN)Running: python ex03/tester.py | cat -e$(RESET)"
+	@$(DOCKER_RUN) $(IMAGE_NAME) python ex03/tester.py | cat -e
 	@echo ""
+	@echo "$(GREEN)Running: python ex03/NULL_not_found.py | cat -e$(RESET)"
 	@$(DOCKER_RUN) $(IMAGE_NAME) python ex03/NULL_not_found.py | cat -e
 
 # Accepts ARG for command-line argument
 04: build
 	@echo "$(GREEN)Running ex04 with ARG=$(ARG)...$(RESET)"
-	@echo ""
 	@$(DOCKER_RUN) $(IMAGE_NAME) python ex04/whatis.py $(ARG)
 
 # Uses -it for possible user input
 05: build
 	@echo "$(GREEN)Running ex05 with ARG=$(ARG)...$(RESET)"
-	@echo ""
 	@$(DOCKER_RUN_IT) $(IMAGE_NAME) python ex05/building.py $(ARG)
 
 # Accepts ARG for command-line arguments
 06: build
 	@echo "$(GREEN)Running ex06 with ARG=$(ARG)...$(RESET)"
-	@echo ""
 	@$(DOCKER_RUN) $(IMAGE_NAME) python ex06/filterstring.py $(ARG)
 
 # Accepts ARG for command-line argument
 07: build
 	@echo "$(GREEN)Running ex07 with ARG=$(ARG)...$(RESET)"
-	@echo ""
 	@$(DOCKER_RUN) $(IMAGE_NAME) python ex07/sos.py $(ARG) | cat -e
 
 08: build
 	@echo "$(GREEN)Running ex08...$(RESET)"
-	@echo ""
 	@$(DOCKER_RUN) $(IMAGE_NAME) python ex08/Loading.py
 
 # Install and test ft_package locally
